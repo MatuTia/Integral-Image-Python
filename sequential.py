@@ -6,21 +6,16 @@ from function import integral
 if __name__ == '__main__':
     np.random.seed(42)
 
-    matrix = np.random.randint(10, size=(1920, 1080))
+    list_matrix = [np.random.randint(10, size=(1920, 1080)) for _ in range(10)]
 
-    control = np.sum(np.sum(matrix, axis=0))
-
-    n, m = matrix.shape
+    control = [np.sum(np.sum(list_matrix[i], axis=0)) for i in range(len(list_matrix))]
 
     start = time.time()
 
-    for diag_sum in range(n + m - 1):
-        for i in range(diag_sum + 1):
-            j = diag_sum - i
-
-            if i < n and j < m:
-                integral(matrix, i, j)
+    for matrix in list_matrix:
+        integral(matrix)
 
     print(time.time() - start)
 
-    assert control == matrix[-1, -1]
+    for i in range(len(list_matrix)):
+        assert control[i] == list_matrix[i][-1, -1]
