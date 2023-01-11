@@ -15,11 +15,12 @@ if __name__ == '__main__':
 
     start = time.time()
 
-    for diag_sum in range(n + m - 1):
+    with Parallel(n_jobs=-2, require='sharedmem') as parallel:
 
-        Parallel(n_jobs=-2, require='sharedmem')(delayed(integral)(matrix, i, diag_sum - i)
-                                                 for i in range(diag_sum + 1)
-                                                 if i < n and diag_sum - i < m)
+        for diag_sum in range(n + m - 1):
+            parallel(delayed(integral)(matrix, i, diag_sum - i)
+                     for i in range(diag_sum + 1)
+                     if i < n and diag_sum - i < m)
 
     print(time.time() - start)
 
