@@ -14,9 +14,12 @@ if __name__ == '__main__':
 
     start = time.time()
 
-    for i in range(n):
-        for j in range(m):
-            integral(matrix, i, j)
+    for diag_sum in range(n + m - 1):
+        for i in range(diag_sum + 1):
+            j = diag_sum - i
+
+            if i < n and j < m:
+                integral(matrix, i, j)
 
     print(time.time() - start)
 
