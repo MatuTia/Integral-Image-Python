@@ -13,9 +13,9 @@ if __name__ == '__main__':
 
     start = time.time()
 
-    Parallel(n_jobs=-2, require='sharedmem')(delayed(integral)(matrix) for matrix in list_matrix)
+    result = Parallel(n_jobs=-2)(delayed(integral)(matrix) for matrix in list_matrix)
 
     print(time.time() - start)
 
-    for i in range(len(list_matrix)):
-        assert control[i] == list_matrix[i][-1, -1]
+    for i in range(len(result)):
+        assert control[i] == result[i][-1, -1]

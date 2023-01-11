@@ -12,10 +12,9 @@ if __name__ == '__main__':
 
     start = time.time()
 
-    for matrix in list_matrix:
-        integral(matrix)
+    result = [integral(list_matrix[i]) for i in range(len(list_matrix))]
 
     print(time.time() - start)
 
-    for i in range(len(list_matrix)):
-        assert control[i] == list_matrix[i][-1, -1]
+    for i in range(len(result)):
+        assert control[i] == result[i][-1, -1]
