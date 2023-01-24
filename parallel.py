@@ -16,10 +16,11 @@ if __name__ == '__main__':
 
     print(time.time() - start)
 
-    result = Parallel(n_jobs=236)(delayed(integral)(matrix) for matrix in list_matrix)
+    result = Parallel(n_jobs=-1)(delayed(integral)(matrix) for matrix in list_matrix)
 
     print(time.time() - start)
 
+    # Test the algorithm
     control = [np.sum(np.sum(list_matrix[i], axis=0)) for i in range(len(list_matrix))]
 
     for i in range(len(result)):
